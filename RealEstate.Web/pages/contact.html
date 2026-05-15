@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<!-- SUCCESS POPUP -->
+<div class="popup-overlay" id="successPopup">
+    <div class="popup-box">
+        <div class="popup-icon">✉️</div>
+        <h3>Message Sent!</h3>
+        <p>Thank you for reaching out. Our team will review your message and get back to you within 24 hours.</p>
+        <button class="popup-close" onclick="closePopup()">Got it</button>
+    </div>
+</div>
+
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">🏠 RealEstate</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <section class="featured">
+            <h2>Contact Us</h2>
+            <p style="margin-bottom: 40px; color: #666; font-size: 16px;">
+                Have questions about a property or need assistance? Get in touch with us!
+            </p>
+
+            <div class="form-container">
+                <div id="alertMessage" class="alert"></div>
+
+                <div class="form-group">
+                    <div class="form-group-header">
+                        <label for="contactName">Your Name</label>
+                        <div class="error"></div>
+                    </div>
+                    <input id="contactName" type="text" placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-header">
+                        <label for="contactEmail">Your Email</label>
+                        <div class="error"></div>
+                    </div>
+                    <input id="contactEmail" type="email" placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-header">
+                        <label for="contactSubject">Subject</label>
+                        <div class="error"></div>
+                    </div>
+                    <input id="contactSubject" type="text" placeholder="What is this about?">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-header">
+                        <label for="contactMessage">Message</label>
+                        <div class="error"></div>
+                    </div>
+                    <textarea id="contactMessage" placeholder="Tell us more..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button onclick="sendContact()">Send Message</button>
+                </div>
+            </div>
+
+            <!-- INFO SECTION -->
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                <div class="feature-card">
+                    <h3>📞 Phone</h3>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📧 Email</h3>
+                    <p>info@realestate.com</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📍 Address</h3>
+                    <p>123 Real Estate Ave, City, State 12345</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/contact.js"></script>
+</body>
+</html>

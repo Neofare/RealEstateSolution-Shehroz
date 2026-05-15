@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Logs
+*.log
+
+# SQL LocalDB
+*.mdf
+*.ldf
+
+# Node modules (future-proof)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db

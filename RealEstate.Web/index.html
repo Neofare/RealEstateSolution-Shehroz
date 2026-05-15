@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate - Find Your Dream Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="index.html" class="logo">🏠 RealEstate</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="pages/properties.html">Properties</a>
+            <a href="pages/contact.html">Contact</a>
+        </nav>
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="overlay">
+                <h1>Find Your Dream Home</h1>
+                <p>Discover the best properties with verified listings and trusted agents</p>
+
+                <div class="search-box">
+                    <input type="text" id="heroSearch" placeholder="Search by city, area, or property type...">
+                    <button onclick="searchProperties()">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED CATEGORIES -->
+        <section class="featured">
+            <h2>Browse by Type</h2>
+            <div class="featured-grid">
+                <a href="pages/properties.html?type=villa" class="feature-card">
+                    <h3>🏰 Luxury Villas</h3>
+                    <p>Premium properties in prime locations</p>
+                </a>
+
+                <a href="pages/properties.html?type=apartment" class="feature-card">
+                    <h3>🏢 Modern Apartments</h3>
+                    <p>Contemporary living spaces with all amenities</p>
+                </a>
+
+                <a href="pages/properties.html?type=house" class="feature-card">
+                    <h3>🏡 Family Houses</h3>
+                    <p>Spacious homes perfect for families</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- FEATURED PROPERTIES -->
+        <section class="featured">
+            <h2>Featured Properties</h2>
+            <div class="featured-grid" id="featuredProperties"></div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section class="featured">
+            <h2>Why Choose Us?</h2>
+            <div class="featured-grid">
+                <div class="feature-card">
+                    <h3>✅ Verified Listings</h3>
+                    <p>All properties are verified and authentic</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🔒 Secure Transactions</h3>
+                    <p>Safe and transparent buying process</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>👥 Expert Support</h3>
+                    <p>Professional agents ready to help</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/navbar.js"></script>  <!-- add this -->
+    <script src="assets/js/home.js"></script>
+</body>
+</html>

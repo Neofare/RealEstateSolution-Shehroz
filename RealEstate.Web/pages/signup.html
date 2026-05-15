@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">🏠 RealEstate</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <div class="form-container">
+            <h2>Create Account</h2>
+            <div id="alertMessage" class="alert"></div>
+
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input id="fullname" type="text" placeholder="John Doe">
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-email">Email Address</label>
+                <input id="signup-email" type="email" placeholder="you@example.com">
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input id="phone" type="tel" placeholder="+1 (555) 123-4567">
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input id="signup-password" type="password" placeholder="••••••••">
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input id="confirm-password" type="password" placeholder="••••••••">
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="terms">
+                <span class="checkbox-label">I agree to the <a href="#">Terms and Conditions</a></span>
+            </div>
+
+            <div class="form-group">
+                <button onclick="handleSignup()">Create Account</button>
+            </div>
+
+            <div class="form-link">
+                Already have an account? <a href="login.html">Sign In</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/signup.js"></script>
+</body>
+</html>

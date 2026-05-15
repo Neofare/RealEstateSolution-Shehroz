@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Properties - Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">🏠 RealEstate</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <section class="featured">
+            <h2 id="page-title">Properties</h2>
+
+            <!-- FILTERS -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="typeFilter">Property Type:</label>
+                    <select id="typeFilter">
+                        <option value="">All</option>
+                        <option value="villa">Villa</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="house">House</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="bedroomsFilter">Min Bedrooms:</label>
+                    <select id="bedroomsFilter">
+                        <option value="">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="priceFilter">Max Price ($):</label>
+                    <input type="number" id="priceFilter" placeholder="100000" min="0" step="10000">
+                </div>
+
+                <div class="filter-group">
+                    <button onclick="filterProperties()">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- PROPERTIES GRID -->
+            <div id="properties" class="featured-grid"></div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/navbar.js"></script>  <!-- add this -->
+    <script src="../assets/js/properties.js"></script>
+</body>
+</html>
