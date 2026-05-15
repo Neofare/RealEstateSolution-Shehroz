@@ -1,6 +1,6 @@
 # 🏠 REAL ESTATE WEBSITE - FRONTEND
 
-**Complete, Professional Real Estate Website Frontend** - Built for your college project with everything you need to succeed!
+**Complete, Professional Real Estate Website ** - Built for your college project with everything you need to succeed!
 
 ---
 
