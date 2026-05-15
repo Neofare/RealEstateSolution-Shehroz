@@ -17,5 +17,6 @@ public class AppDbContext : DbContext
 
     public DbSet<Property> Properties => Set<Property>();
     public DbSet<Agent> Agents => Set<Agent>();
+    public DbSet<User> Users => Set<User>();
     public DbSet<Inquiry> Inquiries => Set<Inquiry>();
 }

@@ -1,5 +1,16 @@
 const API_URL = "https://localhost:7144/api";
 
+const API_BASE_URL = "https://localhost:7144/api";
+
+const API = {
+    authRegister: `${API_BASE_URL}/Auth/register`,
+    authLogin: `${API_BASE_URL}/Auth/login`,
+    properties: `${API_BASE_URL}/Property`,
+    inquiries: `${API_BASE_URL}/Inquiry`
+};
+
+
+
 // 5 example properties — used as fallback when API is unreachable
 const EXAMPLE_PROPERTIES = [
     {

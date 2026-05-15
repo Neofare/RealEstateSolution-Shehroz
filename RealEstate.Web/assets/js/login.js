@@ -5,24 +5,28 @@ function validateEmail(email) {
 }
 
 // Show alert
-function showAlert(message, type = 'success') {
+function showAlert(message, type = "success") {
     const alert = document.getElementById("alertMessage");
     alert.textContent = message;
     alert.className = `alert show ${type}`;
+
     setTimeout(() => {
         alert.classList.remove("show");
     }, 5000);
 }
 
 // Handle login
-function handleLogin() {
+async function handleLogin() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // Validate inputs
     let hasError = false;
     const errors = document.querySelectorAll(".form-group .error");
-    errors.forEach(err => err.classList.remove("show"));
+
+    errors.forEach(err => {
+        err.textContent = "";
+        err.classList.remove("show");
+    });
 
     if (!email || !validateEmail(email)) {
         document.querySelectorAll(".form-group")[0].querySelector(".error").textContent = "Valid email is required";
@@ -38,21 +42,41 @@ function handleLogin() {
 
     if (hasError) return;
 
-    // For demo purposes, we'll use localStorage
-    // In production, this should authenticate with a backend API
-    const mockUser = {
-        id: 1,
-        name: email.split("@")[0],
-        email: email,
-        createdAt: new Date()
-    };
+    try {
+        const response = await fetch(API.authLogin, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
 
-    saveUser(mockUser);
-    showAlert("✓ Login successful! Redirecting...", "success");
+        const result = await response.json().catch(() => null);
 
-    setTimeout(() => {
-        window.location.href = "../index.html";
-    }, 1500);
+        if (!response.ok) {
+            showAlert("✗ " + (result?.message || result || "Invalid email or password."), "error");
+            return;
+        }
+
+        localStorage.setItem("loggedInUser", JSON.stringify(result.user));
+
+        showAlert("✓ Login successful! Redirecting...", "success");
+
+        setTimeout(() => {
+            if (result.user.role === "Admin") {
+                window.location.href = "admin.html";
+            } else {
+                window.location.href = "../index.html";
+            }
+        }, 1500);
+
+    } catch (error) {
+        console.error(error);
+        showAlert("✗ Server error. Make sure backend is running.", "error");
+    }
 }
 
 // Allow Enter key to submit
