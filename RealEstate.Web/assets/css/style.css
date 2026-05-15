@@ -34,7 +34,7 @@ button:hover {
     opacity: 0.9;
 }
 
-/* NAVBAR */
+
 /* NAVBAR */
 .navbar {
     display: grid;
@@ -74,6 +74,51 @@ button:hover {
             .navbar nav a:hover {
                 color: #4facfe;
             }
+
+
+
+
+#navAuth {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-pill {
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 999px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.logout-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #ff4d4d;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.auth-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.auth-button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #4facfe;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
 
     .navbar #navAuth {
         justify-self: end;

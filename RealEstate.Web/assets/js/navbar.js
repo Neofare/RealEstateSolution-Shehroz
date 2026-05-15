@@ -1,19 +1,50 @@
+function getUser() {
+    const userData = localStorage.getItem("loggedInUser");
+
+    if (!userData) return null;
+
+    try {
+        return JSON.parse(userData);
+    } catch (error) {
+        console.error("Invalid user data:", error);
+        localStorage.removeItem("loggedInUser");
+        return null;
+    }
+}
+
+function isInsidePagesFolder() {
+    return window.location.pathname.includes("/pages/");
+}
+
+function getBasePath() {
+    return isInsidePagesFolder() ? "" : "pages/";
+}
+
+function getHomePath() {
+    return isInsidePagesFolder() ? "../index.html" : "index.html";
+}
+
 function updateNavbar() {
     const user = getUser();
     const navAuth = document.getElementById("navAuth");
+
     if (!navAuth) return;
 
-    // Detect if we're in the pages/ subfolder or at root
-    const inPages = window.location.pathname.includes("/pages/");
-    const base = inPages ? "" : "pages/";
-    const rootBase = inPages ? "../" : "";
+    const base = getBasePath();
 
     if (user) {
+        const displayName = user.fullName || user.name || user.email || "User";
+        const isAdmin = user.role === "Admin";
+
         navAuth.innerHTML = `
             <div class="user-menu">
-                <button onclick="toggleDropdown()">👤 ${user.name}</button>
+                <button onclick="toggleDropdown()">
+                    👤 ${displayName}
+                </button>
+
                 <div class="dropdown" id="userDropdown">
-                    <a href="${base}add-property.html">+ Add Property</a>
+                    ${isAdmin ? `<a href="${base}add-property.html">+ Add Property</a>` : ""}
+                    ${isAdmin ? `<a href="${base}admin.html">Admin Panel</a>` : ""}
                     <button onclick="logout()">Logout</button>
                 </div>
             </div>
@@ -32,8 +63,14 @@ function toggleDropdown() {
     document.getElementById("userDropdown")?.classList.toggle("active");
 }
 
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = getHomePath();
+}
+
 document.addEventListener("click", (e) => {
     const userMenu = document.querySelector(".user-menu");
+
     if (!userMenu?.contains(e.target)) {
         document.getElementById("userDropdown")?.classList.remove("active");
     }
@@ -41,16 +78,11 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     updateNavbar();
-});
 
-// PAGE TRANSITIONS
-document.addEventListener("DOMContentLoaded", () => {
-    // Fade in on load
     requestAnimationFrame(() => {
         document.body.classList.add("page-ready");
     });
 
-    // Intercept all internal link clicks
     document.addEventListener("click", (e) => {
         const link = e.target.closest("a");
 
@@ -61,13 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (link.href.startsWith("tel:")) return;
         if (link.href === window.location.href) return;
 
-        // Only intercept same-origin links
         if (link.origin !== window.location.origin) return;
 
         e.preventDefault();
+
         const destination = link.href;
 
-        // Play exit animation then navigate
         document.body.classList.add("page-exit");
 
         setTimeout(() => {

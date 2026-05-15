@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using RealEstate.Infrastructure.Data;
 using RealEstate.Infrastructure.Services;
+using Microsoft.Extensions.FileProviders;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +36,28 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+
+var frontendPath = Path.GetFullPath(
+    Path.Combine(builder.Environment.ContentRootPath, "..", "RealEstate.Web")
+);
+
+if (Directory.Exists(frontendPath))
+{
+    var frontendProvider = new PhysicalFileProvider(frontendPath);
+
+    app.UseDefaultFiles(new DefaultFilesOptions
+    {
+        FileProvider = frontendProvider
+    });
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = frontendProvider
+    });
+}
+
+
 
 app.UseSwagger();
 app.UseSwaggerUI();
