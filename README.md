@@ -1,6 +1,6 @@
-# 🏠 REAL ESTATE WEBSITE - FRONTEND
+# 🏠 REAL ESTATE WEBSITE - By Shehroz
 
-**Complete, Professional Real Estate Website Frontend** - Built for your college project with everything you need to succeed!
+**Complete, Professional Real Estate Website ** 
 
 ---
 
