@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Inquiries - Real Estate</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">🏠 RealEstate</a>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <section class="admin-dashboard">
+
+            <div class="admin-header">
+                <div>
+                    <h1>Customer Inquiries</h1>
+                    <p>View messages submitted by users from property/contact forms.</p>
+                </div>
+
+                <a href="admin.html" class="admin-primary-btn">
+                    ← Back to Dashboard
+                </a>
+            </div>
+
+            <div id="inquiriesAlert" class="alert"></div>
+
+            <div class="manage-table-wrapper">
+                <table class="manage-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Property ID</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inquiriesTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align:center; padding: 30px;">
+                                Loading inquiries...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/admin-inquiries.js"></script>
+</body>
+</html>

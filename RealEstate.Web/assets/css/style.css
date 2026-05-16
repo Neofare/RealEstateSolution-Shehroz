@@ -1148,3 +1148,14 @@ body.popup-open {
         height: 55px;
     }
 }
+
+
+.table-link {
+    color: #4facfe;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+    .table-link:hover {
+        text-decoration: underline;
+    }

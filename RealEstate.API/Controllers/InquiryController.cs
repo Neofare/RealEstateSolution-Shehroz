@@ -15,11 +15,15 @@ public class InquiryController : ControllerBase
         _service = service;
     }
 
+
+
     [HttpGet]
     public IActionResult GetAll()
     {
         return Ok(_service.GetAll());
     }
+
+
 
     [HttpPost]
     public IActionResult Create(Inquiry inquiry)

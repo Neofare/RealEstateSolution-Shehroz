@@ -14,13 +14,18 @@ public class InquiryService : IInquiryService
 
     public Inquiry Add(Inquiry inquiry)
     {
+        inquiry.CreatedAt = DateTime.UtcNow;
+
         _context.Inquiries.Add(inquiry);
         _context.SaveChanges();
+
         return inquiry;
     }
 
     public List<Inquiry> GetAll()
     {
-        return _context.Inquiries.ToList();
+        return _context.Inquiries
+            .OrderByDescending(i => i.CreatedAt)
+            .ToList();
     }
 }

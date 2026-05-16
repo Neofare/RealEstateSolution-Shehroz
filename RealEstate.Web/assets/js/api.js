@@ -88,3 +88,14 @@ async function updateProperty(id, propertyData) {
 
     return await response.json();
 }
+
+
+async function getInquiries() {
+    const response = await fetch(API.inquiries);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch inquiries.");
+    }
+
+    return await response.json();
+}
