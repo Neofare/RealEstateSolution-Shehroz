@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Real Estate</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">🏠 RealEstate</a>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+
+        <section class="admin-dashboard">
+
+            <div class="admin-header">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p>Manage properties, inquiries, and website content.</p>
+                </div>
+
+                <a href="add-property.html" class="admin-primary-btn">
+                    + Add Property
+                </a>
+            </div>
+
+            <!-- STATS CARDS -->
+            <div class="admin-stats-grid">
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">🏠</span>
+                    <h3 id="totalProperties">0</h3>
+                    <p>Total Properties</p>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">📩</span>
+                    <h3 id="totalInquiries">Soon</h3>
+                    <p>Total Inquiries</p>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">👥</span>
+                    <h3 id="totalUsers">Soon</h3>
+                    <p>Registered Users</p>
+                </div>
+
+            </div>
+
+            <!-- ADMIN ACTIONS -->
+            <div class="admin-actions-grid">
+
+                <a href="add-property.html" class="admin-action-card">
+                    <h3>➕ Add New Property</h3>
+                    <p>Create a new listing and publish it to the properties page.</p>
+                </a>
+
+                <a href="properties.html" class="admin-action-card">
+                    <h3>🏘 View Properties</h3>
+                    <p>Browse all currently listed properties on the website.</p>
+                </a>
+
+                <a href="#" class="admin-action-card disabled-card">
+                    <h3>📩 View Inquiries</h3>
+                    <p>Coming next: view all customer messages and property inquiries.</p>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>
