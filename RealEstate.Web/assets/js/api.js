@@ -4,7 +4,8 @@ const API = {
     authRegister: `${API_BASE_URL}/Auth/register`,
     authLogin: `${API_BASE_URL}/Auth/login`,
     properties: `${API_BASE_URL}/Property`,
-    inquiries: `${API_BASE_URL}/Inquiry`
+    inquiries: `${API_BASE_URL}/Inquiry`,
+    adminStats: `${API_BASE_URL}/Admin/stats`
 };
 
 async function getProperties() {
@@ -95,6 +96,17 @@ async function getInquiries() {
 
     if (!response.ok) {
         throw new Error("Failed to fetch inquiries.");
+    }
+
+    return await response.json();
+}
+
+
+async function getAdminStats() {
+    const response = await fetch(API.adminStats);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch admin stats.");
     }
 
     return await response.json();

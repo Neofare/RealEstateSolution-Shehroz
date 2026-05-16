@@ -29,24 +29,35 @@ function protectAdminPage() {
     return true;
 }
 
+function setStatValue(id, value) {
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.textContent = value;
+    }
+}
+
 async function loadAdminStats() {
     try {
-        const properties = await getProperties();
+        const stats = await getAdminStats();
 
-        const totalProperties = document.getElementById("totalProperties");
+        setStatValue("totalProperties", stats.totalProperties ?? 0);
+        setStatValue("totalInquiries", stats.totalInquiries ?? 0);
+        setStatValue("totalUsers", stats.totalUsers ?? 0);
 
-        if (totalProperties) {
-            totalProperties.textContent = properties.length;
-        }
+        setStatValue("totalVillas", stats.totalVillas ?? 0);
+        setStatValue("totalApartments", stats.totalApartments ?? 0);
+        setStatValue("totalHouses", stats.totalHouses ?? 0);
 
     } catch (error) {
         console.error("Failed to load admin stats:", error);
 
-        const totalProperties = document.getElementById("totalProperties");
-
-        if (totalProperties) {
-            totalProperties.textContent = "Error";
-        }
+        setStatValue("totalProperties", "Error");
+        setStatValue("totalInquiries", "Error");
+        setStatValue("totalUsers", "Error");
+        setStatValue("totalVillas", "Error");
+        setStatValue("totalApartments", "Error");
+        setStatValue("totalHouses", "Error");
     }
 }
 
