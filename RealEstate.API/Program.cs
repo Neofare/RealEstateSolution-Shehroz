@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RealEstate.Infrastructure.Data;
 using RealEstate.Infrastructure.Services;
 using Microsoft.Extensions.FileProviders;
-
+using Microsoft.AspNetCore.Builder;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,7 +48,8 @@ if (Directory.Exists(frontendPath))
 
     app.UseDefaultFiles(new DefaultFilesOptions
     {
-        FileProvider = frontendProvider
+        FileProvider = frontendProvider,
+        DefaultFileNames = new List<string> { "landing.html" }
     });
 
     app.UseStaticFiles(new StaticFileOptions

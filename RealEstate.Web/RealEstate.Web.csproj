@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="assets\css\landing.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="images\" />
   </ItemGroup>
 
