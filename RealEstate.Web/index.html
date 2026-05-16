@@ -12,16 +12,19 @@
     <!-- NAVBAR -->
     <header class="navbar">
         <a href="index.html" class="logo">🏠 RealEstate</a>
+
         <nav>
             <a href="index.html">Home</a>
             <a href="pages/properties.html">Properties</a>
             <a href="pages/contact.html">Contact</a>
         </nav>
+
         <div id="navAuth"></div>
     </header>
 
     <!-- MAIN CONTENT -->
     <main class="page-content">
+
         <!-- HERO SECTION -->
         <section class="hero">
             <div class="overlay">
@@ -29,15 +32,24 @@
                 <p>Discover the best properties with verified listings and trusted agents</p>
 
                 <div class="search-box">
-                    <input type="text" id="heroSearch" placeholder="Search by city, area, or property type...">
-                    <button onclick="searchProperties()">Search</button>
+                    <input id="homeSearchInput"
+                           type="text"
+                           placeholder="Search by city, type, or title..."
+                           autocomplete="off">
+
+                    <button type="button" onclick="handleHomeSearch()">
+                        Search
+                    </button>
                 </div>
+
+                <p id="searchError" class="search-error"></p>
             </div>
         </section>
 
         <!-- FEATURED CATEGORIES -->
         <section class="featured">
             <h2>Browse by Type</h2>
+
             <div class="featured-grid">
                 <a href="pages/properties.html?type=villa" class="feature-card">
                     <h3>🏰 Luxury Villas</h3>
@@ -65,6 +77,7 @@
         <!-- WHY CHOOSE US -->
         <section class="featured">
             <h2>Why Choose Us?</h2>
+
             <div class="featured-grid">
                 <div class="feature-card">
                     <h3>✅ Verified Listings</h3>
@@ -82,6 +95,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -91,7 +105,40 @@
 
     <!-- SCRIPTS -->
     <script src="assets/js/api.js"></script>
-    <script src="assets/js/navbar.js"></script>  <!-- add this -->
+    <script src="assets/js/navbar.js"></script>
     <script src="assets/js/home.js"></script>
+
+    <!-- HOME SEARCH SCRIPT -->
+    <script>
+        function handleHomeSearch() {
+            const searchInput = document.getElementById("homeSearchInput");
+            const searchError = document.getElementById("searchError");
+
+            const searchValue = searchInput.value.trim();
+
+            searchError.textContent = "";
+
+            if (!searchValue) {
+                searchError.textContent = "Please enter a city, property type, or keyword.";
+                searchInput.focus();
+                return;
+            }
+
+            if (searchValue.length < 2) {
+                searchError.textContent = "Search must be at least 2 characters.";
+                searchInput.focus();
+                return;
+            }
+
+            window.location.href = `pages/properties.html?search=${encodeURIComponent(searchValue)}`;
+        }
+
+        document.getElementById("homeSearchInput").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                handleHomeSearch();
+            }
+        });
+    </script>
 </body>
 </html>

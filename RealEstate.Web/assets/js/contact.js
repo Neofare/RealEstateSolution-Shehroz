@@ -24,12 +24,24 @@ function showAlert(message, type = "success") {
 
 // Popup
 function showPopup() {
-    document.getElementById("successPopup").classList.add("show");
+    const popup = document.getElementById("successPopup");
+
+    if (!popup) return;
+
+    popup.classList.add("show");
+    document.body.classList.add("popup-open");
 }
 
 function closePopup() {
-    document.getElementById("successPopup").classList.remove("show");
+    const popup = document.getElementById("successPopup");
+
+    if (!popup) return;
+
+    popup.classList.remove("show");
+    document.body.classList.remove("popup-open");
 }
+
+
 
 // Send contact message
 async function sendContact() {

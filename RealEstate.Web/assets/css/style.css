@@ -241,6 +241,15 @@ button:hover {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
+
+.search-error {
+    margin-top: 12px;
+    color: #ffdddd;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 20px;
+}
+
 .search-box input {
     padding: 15px 20px;
     border: none;
@@ -695,96 +704,25 @@ button:hover {
 /* PAGE TRANSITIONS */
 body {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.35s ease;
 }
 
     body.page-ready {
         opacity: 1;
-        transform: translateY(0);
     }
 
     body.page-exit {
         opacity: 0;
-        transform: translateY(-8px);
-        transition: opacity 0.25s ease, transform 0.25s ease;
+        transition: opacity 0.25s ease;
     }
 
 
 
-/* SUCCESS POPUP */
-.popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
 
-    .popup-overlay.show {
-        opacity: 1;
-        visibility: visible;
-    }
 
-.popup-box {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    transform: translateY(30px) scale(0.95);
-    transition: transform 0.35s ease, opacity 0.35s ease;
-    opacity: 0;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-}
 
-.popup-overlay.show .popup-box {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-}
-
-.popup-icon {
-    width: 64px;
-    height: 64px;
-    background: #eaf6ff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 28px;
-}
-
-.popup-box h3 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.popup-box p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 24px;
-}
-
-.popup-close {
-    background: #4facfe;
-    color: white;
-    border: none;
-    padding: 12px 32px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointe
-    /* RESPONSIVE */
+        
+        /* RESPONSIVE */
     @media (max-width: 768px) {
     .navbar {
         padding: 15px 20px;
@@ -846,6 +784,7 @@ body {
 
         .filter-group input,
         .filter-group select,
+        .filter-group select,
         .filter-group button {
             width: 100%;
         }
@@ -854,4 +793,85 @@ body {
         margin: 20px;
         padding: 20px;
     }
+}
+
+
+
+/* ===============================
+   FINAL POPUP POSITION FIX
+   Keep this at the VERY BOTTOM
+================================ */
+
+#successPopup.popup-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(15, 23, 42, 0.6) !important;
+    backdrop-filter: blur(6px);
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 999999 !important;
+    padding: 20px !important;
+    margin: 0 !important;
+}
+
+    #successPopup.popup-overlay.show {
+        display: flex !important;
+    }
+
+#successPopup .popup-box {
+    width: min(420px, 92vw) !important;
+    background: #ffffff !important;
+    border-radius: 18px !important;
+    padding: 32px 28px !important;
+    text-align: center !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25) !important;
+    margin: 0 !important;
+}
+
+#successPopup .popup-icon {
+    width: 70px !important;
+    height: 70px !important;
+    margin: 0 auto 18px !important;
+    border-radius: 50% !important;
+    background: #e0f2fe !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 32px !important;
+}
+
+#successPopup .popup-box h3 {
+    font-size: 24px !important;
+    margin-bottom: 10px !important;
+    color: #111827 !important;
+}
+
+#successPopup .popup-box p {
+    font-size: 15px !important;
+    color: #6b7280 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 24px !important;
+}
+
+#successPopup .popup-close {
+    width: 100% !important;
+    padding: 12px 18px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    background: #4facfe !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+}
+
+    #successPopup .popup-close:hover {
+        background: #238be6 !important;
+    }
+
+body.popup-open {
+    overflow: hidden !important;
 }

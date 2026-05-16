@@ -1,9 +1,15 @@
+// Normalize text safely
+function normalizeText(value) {
+    return (value || "").toString().trim().toLowerCase();
+}
+
 // Load and filter properties
 async function loadProperties() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
-        const type = urlParams.get("type");
-        const search = urlParams.get("search");
+
+        const type = normalizeText(urlParams.get("type"));
+        const search = normalizeText(urlParams.get("search"));
         const bedrooms = urlParams.get("bedrooms");
         const maxPrice = urlParams.get("maxPrice");
 
@@ -12,10 +18,12 @@ async function loadProperties() {
 
         container.innerHTML = "";
 
+        syncFiltersWithUrl(type, bedrooms, maxPrice);
+
         if (!allProperties || allProperties.length === 0) {
             container.innerHTML = `
                 <p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">
-                    No properties found.
+                    No properties are currently available.
                 </p>
             `;
             updatePageTitle([]);
@@ -24,39 +32,56 @@ async function loadProperties() {
 
         let filtered = allProperties;
 
+        // Filter by property type
         if (type) {
             filtered = filtered.filter(p =>
-                p.type?.toLowerCase() === type.toLowerCase()
+                normalizeText(p.type) === type
             );
         }
 
+        // Accurate SQL-backed frontend search
         if (search) {
-            const searchLower = search.toLowerCase();
+            filtered = filtered.filter(p => {
+                const title = normalizeText(p.title);
+                const location = normalizeText(p.location);
+                const propertyType = normalizeText(p.type);
+                const description = normalizeText(p.description);
 
-            filtered = filtered.filter(p =>
-                p.title?.toLowerCase().includes(searchLower) ||
-                p.location?.toLowerCase().includes(searchLower) ||
-                p.type?.toLowerCase().includes(searchLower) ||
-                p.description?.toLowerCase().includes(searchLower)
-            );
+                return (
+                    title.includes(search) ||
+                    location.includes(search) ||
+                    propertyType.includes(search) ||
+                    description.includes(search)
+                );
+            });
         }
 
+        // Filter by minimum bedrooms
         if (bedrooms) {
-            filtered = filtered.filter(p =>
-                p.bedrooms >= parseInt(bedrooms)
-            );
+            const minBedrooms = parseInt(bedrooms);
+
+            if (!isNaN(minBedrooms)) {
+                filtered = filtered.filter(p =>
+                    Number(p.bedrooms) >= minBedrooms
+                );
+            }
         }
 
+        // Filter by maximum price
         if (maxPrice) {
-            filtered = filtered.filter(p =>
-                p.price <= parseFloat(maxPrice)
-            );
+            const max = parseFloat(maxPrice);
+
+            if (!isNaN(max)) {
+                filtered = filtered.filter(p =>
+                    Number(p.price) <= max
+                );
+            }
         }
 
         if (filtered.length === 0) {
             container.innerHTML = `
                 <p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">
-                    No properties match your criteria.
+                    No properties match your search or filters.
                 </p>
             `;
             updatePageTitle(filtered);
@@ -75,7 +100,7 @@ async function loadProperties() {
 
         document.getElementById("properties").innerHTML = `
             <p style="grid-column: 1/-1; color: red; text-align: center; padding: 40px;">
-                Error loading properties. Please try again.
+                Error loading properties from the backend. Please make sure the server is running.
             </p>
         `;
     }
@@ -95,20 +120,20 @@ function createPropertyCard(property) {
     div.innerHTML = `
         <img 
             src="${imageUrl}" 
-            alt="${property.title}" 
+            alt="${property.title || "Property Image"}" 
             onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'"
         >
 
         <div class="card-content">
-            <h3>${property.title}</h3>
-            <p>📍 ${property.location}</p>
+            <h3>${property.title || "Untitled Property"}</h3>
+            <p>📍 ${property.location || "Location not available"}</p>
             <p class="price">${price}</p>
             <p>
-                🛏️ ${property.bedrooms} Beds |
-                🛁 ${property.bathrooms} Baths |
-                📐 ${property.area} sqft
+                🛏️ ${property.bedrooms || 0} Beds |
+                🛁 ${property.bathrooms || 0} Baths |
+                📐 ${property.area || 0} sqft
             </p>
-            <p style="font-size: 12px; color: #999;">
+            <p style="font-size: 12px; color: #999; text-transform: capitalize;">
                 ${property.type || "Property"}
             </p>
         </div>
@@ -133,8 +158,8 @@ function updatePageTitle(properties) {
     if (!pageTitle) return;
 
     const urlParams = new URLSearchParams(window.location.search);
-    const type = urlParams.get("type");
-    const search = urlParams.get("search");
+    const type = normalizeText(urlParams.get("type"));
+    const search = normalizeText(urlParams.get("search"));
 
     if (search) {
         pageTitle.textContent = `Search Results for "${search}" (${properties.length} found)`;
@@ -152,14 +177,18 @@ function filterProperties() {
 
     const params = new URLSearchParams();
 
+    if (type) params.append("type", type);
     if (bedrooms) params.append("bedrooms", bedrooms);
     if (maxPrice) params.append("maxPrice", maxPrice);
-    if (type) params.append("type", type);
 
     const currentParams = new URLSearchParams(window.location.search);
 
     if (currentParams.has("search")) {
-        params.append("search", currentParams.get("search"));
+        const searchValue = currentParams.get("search")?.trim();
+
+        if (searchValue) {
+            params.append("search", searchValue);
+        }
     }
 
     const queryString = params.toString();
@@ -167,6 +196,24 @@ function filterProperties() {
     window.location.href = queryString
         ? `properties.html?${queryString}`
         : "properties.html";
+}
+
+function syncFiltersWithUrl(type, bedrooms, maxPrice) {
+    const typeFilter = document.getElementById("typeFilter");
+    const bedroomsFilter = document.getElementById("bedroomsFilter");
+    const priceFilter = document.getElementById("priceFilter");
+
+    if (typeFilter && type) {
+        typeFilter.value = type;
+    }
+
+    if (bedroomsFilter && bedrooms) {
+        bedroomsFilter.value = bedrooms;
+    }
+
+    if (priceFilter && maxPrice) {
+        priceFilter.value = maxPrice;
+    }
 }
 
 // Initialize properties only
