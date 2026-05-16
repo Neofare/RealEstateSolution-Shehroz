@@ -79,6 +79,11 @@ public class AuthController : ControllerBase
             return Unauthorized(new { message = "Invalid email or password." });
         }
 
+        if (user.IsSuspended)
+        {
+            return Unauthorized(new { message = "Your account has been suspended. Please contact support." });
+        }
+
         var hashedPassword = HashPassword(dto.Password);
 
         if (user.PasswordHash != hashedPassword)

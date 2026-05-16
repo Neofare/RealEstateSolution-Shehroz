@@ -37,6 +37,17 @@ function setStatValue(id, value) {
     }
 }
 
+function setAllStatsToError() {
+    setStatValue("totalProperties", "Error");
+    setStatValue("totalInquiries", "Error");
+    setStatValue("totalUsers", "Error");
+    setStatValue("suspendedUsers", "Error");
+
+    setStatValue("totalVillas", "Error");
+    setStatValue("totalApartments", "Error");
+    setStatValue("totalHouses", "Error");
+}
+
 async function loadAdminStats() {
     try {
         const stats = await getAdminStats();
@@ -44,6 +55,7 @@ async function loadAdminStats() {
         setStatValue("totalProperties", stats.totalProperties ?? 0);
         setStatValue("totalInquiries", stats.totalInquiries ?? 0);
         setStatValue("totalUsers", stats.totalUsers ?? 0);
+        setStatValue("suspendedUsers", stats.suspendedUsers ?? 0);
 
         setStatValue("totalVillas", stats.totalVillas ?? 0);
         setStatValue("totalApartments", stats.totalApartments ?? 0);
@@ -51,13 +63,7 @@ async function loadAdminStats() {
 
     } catch (error) {
         console.error("Failed to load admin stats:", error);
-
-        setStatValue("totalProperties", "Error");
-        setStatValue("totalInquiries", "Error");
-        setStatValue("totalUsers", "Error");
-        setStatValue("totalVillas", "Error");
-        setStatValue("totalApartments", "Error");
-        setStatValue("totalHouses", "Error");
+        setAllStatsToError();
     }
 }
 

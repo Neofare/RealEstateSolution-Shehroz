@@ -5,7 +5,8 @@ const API = {
     authLogin: `${API_BASE_URL}/Auth/login`,
     properties: `${API_BASE_URL}/Property`,
     inquiries: `${API_BASE_URL}/Inquiry`,
-    adminStats: `${API_BASE_URL}/Admin/stats`
+    adminStats: `${API_BASE_URL}/Admin/stats`,
+    adminUsers: `${API_BASE_URL}/Admin/users`
 };
 
 async function getProperties() {
@@ -152,4 +153,42 @@ async function deleteInquiry(id) {
     }
 
     return true;
+}
+
+
+
+
+
+async function getAdminUsers() {
+    const response = await fetch(API.adminUsers);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch users.");
+    }
+
+    return await response.json();
+}
+
+async function suspendUser(id) {
+    const response = await fetch(`${API.adminUsers}/${id}/suspend`, {
+        method: "PUT"
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to suspend user.");
+    }
+
+    return await response.json();
+}
+
+async function activateUser(id) {
+    const response = await fetch(`${API.adminUsers}/${id}/activate`, {
+        method: "PUT"
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to activate user.");
+    }
+
+    return await response.json();
 }

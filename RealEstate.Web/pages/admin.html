@@ -31,12 +31,18 @@
             <div class="admin-header">
                 <div>
                     <h1>Admin Dashboard</h1>
-                    <p>Manage properties, inquiries, and website content.</p>
+                    <p>Manage properties, inquiries, users, and website content.</p>
                 </div>
 
-                <a href="add-property.html" class="admin-primary-btn">
-                    + Add Property
-                </a>
+                <div class="admin-header-actions">
+                    <a href="manage-users.html" class="admin-secondary-btn">
+                        Manage Users
+                    </a>
+
+                    <a href="add-property.html" class="admin-primary-btn">
+                        + Add Property
+                    </a>
+                </div>
             </div>
 
             <!-- STATS CARDS -->
@@ -50,14 +56,38 @@
 
                 <div class="admin-stat-card">
                     <span class="stat-icon">📩</span>
-                    <h3 id="totalInquiries">Soon</h3>
+                    <h3 id="totalInquiries">0</h3>
                     <p>Total Inquiries</p>
                 </div>
 
                 <div class="admin-stat-card">
                     <span class="stat-icon">👥</span>
-                    <h3 id="totalUsers">Soon</h3>
+                    <h3 id="totalUsers">0</h3>
                     <p>Registered Users</p>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">🚫</span>
+                    <h3 id="suspendedUsers">0</h3>
+                    <p>Suspended Users</p>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">🏰</span>
+                    <h3 id="totalVillas">0</h3>
+                    <p>Total Villas</p>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">🏢</span>
+                    <h3 id="totalApartments">0</h3>
+                    <p>Total Apartments</p>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-icon">🏡</span>
+                    <h3 id="totalHouses">0</h3>
+                    <p>Total Houses</p>
                 </div>
 
             </div>
@@ -67,17 +97,22 @@
 
                 <a href="add-property.html" class="admin-action-card">
                     <h3>➕ Add New Property</h3>
-                    <p>Create a new listing and publish it to the properties page.</p>
+                    <p>Create a new property listing and publish it to the website.</p>
                 </a>
 
                 <a href="manage-properties.html" class="admin-action-card">
                     <h3>🏘 Manage Properties</h3>
-                    <p>View all listings and delete unwanted properties.</p>
+                    <p>View, edit, and delete property listings from the database.</p>
                 </a>
 
                 <a href="admin-inquiries.html" class="admin-action-card">
                     <h3>📩 View Inquiries</h3>
-                    <p>View customer messages and property inquiries submitted from the website.</p>
+                    <p>Read customer messages, mark them as resolved or replied, and delete old inquiries.</p>
+                </a>
+
+                <a href="manage-users.html" class="admin-action-card">
+                    <h3>👥 Manage Users</h3>
+                    <p>View registered users and suspend or activate user accounts.</p>
                 </a>
 
             </div>
