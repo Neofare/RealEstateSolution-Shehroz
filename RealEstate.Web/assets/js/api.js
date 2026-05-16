@@ -70,3 +70,21 @@ async function sendInquiry(inquiryData) {
 
     return await response.json();
 }
+
+
+
+async function updateProperty(id, propertyData) {
+    const response = await fetch(`${API.properties}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(propertyData)
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to update property.");
+    }
+
+    return await response.json();
+}

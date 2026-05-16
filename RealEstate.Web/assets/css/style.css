@@ -1092,6 +1092,7 @@ body.popup-open {
 }
 
 .view-btn,
+.edit-btn,
 .delete-btn {
     padding: 8px 12px;
     border: none;
@@ -1109,6 +1110,23 @@ body.popup-open {
     .view-btn:hover {
         background: #bae6fd;
     }
+
+
+.edit-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    background: #fef3c7;
+    color: #92400e;
+}
+
+    .edit-btn:hover {
+        background: #fde68a;
+    }
+
 
 .delete-btn {
     background: #fee2e2;

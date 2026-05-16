@@ -104,16 +104,20 @@ async function loadManageProperties() {
                 </td>
 
                 <td>
-                    <div class="manage-actions">
-                        <button class="view-btn" onclick="viewProperty(${property.id})">
-                            View
-                        </button>
+                <div class="manage-actions">
+                    <button class="view-btn" onclick="viewProperty(${property.id})">
+                        View
+                    </button>
 
-                        <button class="delete-btn" onclick="confirmDeleteProperty(${property.id})">
-                            Delete
-                        </button>
-                    </div>
-                </td>
+                    <button class="edit-btn" onclick="editProperty(${property.id})">
+                        Edit
+                    </button>
+
+                    <button class="delete-btn" onclick="confirmDeleteProperty(${property.id})">
+                        Delete
+                    </button>
+                </div>
+            </td>
             `;
 
             tableBody.appendChild(row);
@@ -134,6 +138,10 @@ async function loadManageProperties() {
 
 function viewProperty(id) {
     window.location.href = `property-details.html?id=${id}`;
+}
+
+function editProperty(id) {
+    window.location.href = `edit-property.html?id=${id}`;
 }
 
 async function confirmDeleteProperty(id) {

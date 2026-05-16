@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Property - Real Estate</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">🏠 RealEstate</a>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <div id="navAuth"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <section class="featured">
+            <h2>Edit Property</h2>
+            <p style="margin-bottom: 30px; color: #666;">
+                Update property details and save changes to the database.
+            </p>
+
+            <div class="form-container">
+                <div id="alertMessage" class="alert"></div>
+
+                <div class="form-group">
+                    <label for="title">Property Title</label>
+                    <input id="title" type="text" placeholder="Luxury Villa in Faisalabad">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Property Type</label>
+                    <select id="type">
+                        <option value="">Select Type</option>
+                        <option value="villa">Villa</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="house">House</option>
+                    </select>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input id="location" type="text" placeholder="Lahore">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input id="price" type="number" placeholder="25000000" min="0">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <input id="bedrooms" type="number" placeholder="5" min="0">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bathrooms">Bathrooms</label>
+                    <input id="bathrooms" type="number" placeholder="4" min="0">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="area">Area</label>
+                    <input id="area" type="number" placeholder="10" min="0" step="0.1">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Image URL</label>
+                    <input id="imageUrl" type="text" placeholder="https://images.unsplash.com/...">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Write property description..."></textarea>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="handleUpdateProperty()">Update Property</button>
+                </div>
+
+                <div class="form-link">
+                    <a href="manage-properties.html">← Back to Manage Properties</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 RealEstate. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/edit-property.js"></script>
+</body>
+</html>
