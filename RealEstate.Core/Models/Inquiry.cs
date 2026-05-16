@@ -10,5 +10,7 @@ public class Inquiry
 
     public int PropertyId { get; set; }
 
+    public string Status { get; set; } = "New"; // New, Resolved, Replied
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

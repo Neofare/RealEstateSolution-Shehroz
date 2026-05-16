@@ -48,14 +48,16 @@
                             <th>Customer</th>
                             <th>Email</th>
                             <th>Property ID</th>
+                            <th>Status</th>
                             <th>Message</th>
                             <th>Date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
                     <tbody id="inquiriesTableBody">
                         <tr>
-                            <td colspan="6" style="text-align:center; padding: 30px;">
+                            <td colspan="8" style="text-align:center; padding: 30px;">
                                 Loading inquiries...
                             </td>
                         </tr>
@@ -70,6 +72,26 @@
     <footer class="footer">
         <p>© 2026 RealEstate. All rights reserved.</p>
     </footer>
+
+
+
+    <!-- INQUIRY DETAILS POPUP -->
+    <div class="popup-overlay" id="inquiryDetailsPopup">
+        <div class="popup-box inquiry-popup-box">
+            <div class="popup-icon">📩</div>
+
+            <h3>Inquiry Details</h3>
+
+            <div id="inquiryDetailsContent" class="inquiry-details-content"></div>
+
+            <button type="button" class="popup-close" onclick="closeInquiryPopup()">
+                Close
+            </button>
+        </div>
+    </div>
+
+
+
 
     <!-- SCRIPTS -->
     <script src="../assets/js/api.js"></script>

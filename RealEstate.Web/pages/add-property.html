@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Property - Real Estate</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
@@ -12,100 +13,118 @@
     <!-- NAVBAR -->
     <header class="navbar">
         <a href="../index.html" class="logo">🏠 RealEstate</a>
+
         <nav>
             <a href="../index.html">Home</a>
             <a href="properties.html">Properties</a>
             <a href="contact.html">Contact</a>
         </nav>
+
         <div id="navAuth"></div>
     </header>
 
     <!-- MAIN CONTENT -->
     <main class="page-content">
-        <div class="form-container" style="max-width: 600px;">
-            <h2>Add New Property</h2>
-            <div id="alertMessage" class="alert"></div>
+        <section class="featured">
 
-            <div class="form-group">
-                <label for="title">Property Title *</label>
-                <input id="title" type="text" placeholder="Beautiful Modern Villa">
-                <div class="error"></div>
+            <div class="admin-page-top">
+                <div>
+                    <h2>Add New Property</h2>
+                    <p style="margin-bottom: 0; color: #666;">
+                        Fill in the details below to create a new property listing.
+                    </p>
+                </div>
+
+                <a href="admin.html" class="admin-secondary-btn">
+                    ← Back to Dashboard
+                </a>
             </div>
 
-            <div class="form-group">
-                <label for="type">Property Type *</label>
-                <select id="type">
-                    <option value="">Select Type</option>
-                    <option value="villa">Villa</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="house">House</option>
-                </select>
-                <div class="error"></div>
+            <div class="form-container" style="max-width: 600px;">
+                <div id="alertMessage" class="alert"></div>
+
+                <div class="form-group">
+                    <label for="title">Property Title *</label>
+                    <input id="title" type="text" placeholder="Beautiful Modern Villa">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Property Type *</label>
+                    <select id="type">
+                        <option value="">Select Type</option>
+                        <option value="villa">Villa</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="house">House</option>
+                    </select>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input id="location" type="text" placeholder="City, District, Address">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price ($) *</label>
+                    <input id="price" type="number" placeholder="500000" min="0" step="1000">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bedrooms">Bedrooms *</label>
+                    <select id="bedrooms">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5+</option>
+                    </select>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bathrooms">Bathrooms *</label>
+                    <select id="bathrooms">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="area">Area (sqft) *</label>
+                    <input id="area" type="number" placeholder="5000" min="0" step="100">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Image URL *</label>
+                    <input id="imageUrl" type="url" placeholder="https://example.com/image.jpg">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" placeholder="Describe the property, amenities, features..."></textarea>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="handleAddProperty()">List Property</button>
+                </div>
+
+                <div class="form-link">
+                    <a href="manage-properties.html">← Back to Manage Properties</a>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="location">Location *</label>
-                <input id="location" type="text" placeholder="City, District, Address">
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="price">Price ($) *</label>
-                <input id="price" type="number" placeholder="500000" min="0" step="1000">
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="bedrooms">Bedrooms *</label>
-                <select id="bedrooms">
-                    <option value="">Select</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5+</option>
-                </select>
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="bathrooms">Bathrooms *</label>
-                <select id="bathrooms">
-                    <option value="">Select</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4+</option>
-                </select>
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="area">Area (sqft) *</label>
-                <input id="area" type="number" placeholder="5000" min="0" step="100">
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="imageUrl">Image URL *</label>
-                <input id="imageUrl" type="url" placeholder="https://example.com/image.jpg">
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description *</label>
-                <textarea id="description" placeholder="Describe the property, amenities, features..."></textarea>
-                <div class="error"></div>
-            </div>
-
-            <div class="form-group">
-                <button onclick="handleAddProperty()">List Property</button>
-            </div>
-
-            <div class="form-link">
-                <a href="../index.html">← Back to Home</a>
-            </div>
-        </div>
+        </section>
     </main>
 
     <!-- FOOTER -->
@@ -115,9 +134,7 @@
 
     <!-- SCRIPTS -->
     <script src="../assets/js/api.js"></script>
-    <script src="../assets/js/add-property.js"></script>
-    <script src="assets/js/navbar.js"></script>  <!-- add this -->
     <script src="../assets/js/navbar.js"></script>
-    <script src="assets/js/home.js"></script>
+    <script src="../assets/js/add-property.js"></script>
 </body>
 </html>

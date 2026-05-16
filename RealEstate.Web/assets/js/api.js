@@ -111,3 +111,45 @@ async function getAdminStats() {
 
     return await response.json();
 }
+
+
+
+async function getInquiryById(id) {
+    const response = await fetch(`${API.inquiries}/${id}`);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch inquiry.");
+    }
+
+    return await response.json();
+}
+
+async function updateInquiryStatus(id, status) {
+    const response = await fetch(`${API.inquiries}/${id}/status`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            status: status
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to update inquiry status.");
+    }
+
+    return await response.json();
+}
+
+async function deleteInquiry(id) {
+    const response = await fetch(`${API.inquiries}/${id}`, {
+        method: "DELETE"
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to delete inquiry.");
+    }
+
+    return true;
+}
