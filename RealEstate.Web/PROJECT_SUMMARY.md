@@ -484,5 +484,3 @@ Your project now includes:
 - **Responsive Breakpoints**: 3+
 
 ---
-
-**Thank you for using this frontend! Best of luck with your college project! 🌟**
