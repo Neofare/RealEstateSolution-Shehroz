@@ -1,166 +1,177 @@
-// Update navbar
-function updateNavbar() {
-    const user = getUser();
-    const navAuth = document.getElementById("navAuth");
+function getLoggedInUser() {
+    const userData = localStorage.getItem("loggedInUser");
+
+    if (!userData) return null;
+
+    try {
+        return JSON.parse(userData);
+    } catch {
+        localStorage.removeItem("loggedInUser");
+        return null;
+    }
+}
+
+function protectAdminPage() {
+    const user = getLoggedInUser();
 
     if (!user) {
+        alert("You must login as admin to access this page.");
         window.location.href = "login.html";
-        return;
+        return false;
     }
 
-    if (user) {
-        navAuth.innerHTML = `
-            <div class="user-menu">
-                <button onclick="toggleDropdown()">👤 ${user.name}</button>
-                <div class="dropdown" id="userDropdown">
-                    <a href="add-property.html">+ Add Property</a>
-                    <button onclick="logout()">Logout</button>
-                </div>
-            </div>
-        `;
+    if (user.role !== "Admin") {
+        alert("Access denied. Admins only.");
+        window.location.href = "../index.html";
+        return false;
     }
+
+    return true;
 }
 
-function toggleDropdown() {
-    const dropdown = document.getElementById("userDropdown");
-    dropdown?.classList.toggle("active");
+function showAlert(message, type = "success") {
+    const alertBox = document.getElementById("alertMessage");
+
+    if (!alertBox) return;
+
+    alertBox.textContent = message;
+    alertBox.className = `alert show ${type}`;
+
+    setTimeout(() => {
+        alertBox.classList.remove("show");
+    }, 5000);
 }
 
-document.addEventListener("click", (e) => {
-    const userMenu = document.querySelector(".user-menu");
-    if (!userMenu?.contains(e.target)) {
-        document.getElementById("userDropdown")?.classList.remove("active");
-    }
-});
-
-// Show alert
-function showAlert(message, type = 'success') {
-    const alert = document.getElementById("alertMessage");
-    alert.textContent = message;
-    alert.className = `alert show ${type}`;
-    if (type === 'success') {
-        setTimeout(() => {
-            alert.classList.remove("show");
-        }, 5000);
-    }
-}
-
-// Handle add property
-async function handleAddProperty() {
-    const title = document.getElementById("title").value.trim();
-    const type = document.getElementById("type").value.trim();
-    const location = document.getElementById("location").value.trim();
-    const price = document.getElementById("price").value.trim();
-    const bedrooms = document.getElementById("bedrooms").value.trim();
-    const bathrooms = document.getElementById("bathrooms").value.trim();
-    const area = document.getElementById("area").value.trim();
-    const imageUrl = document.getElementById("imageUrl").value.trim();
-    const description = document.getElementById("description").value.trim();
-
-    // Validate inputs
-    let hasError = false;
+function clearErrors() {
     const errors = document.querySelectorAll(".form-group .error");
-    errors.forEach(err => err.classList.remove("show"));
+
+    errors.forEach(error => {
+        error.textContent = "";
+        error.classList.remove("show");
+    });
+}
+
+function showFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+
+    if (!field) return;
+
+    const formGroup = field.closest(".form-group");
+    const errorBox = formGroup?.querySelector(".error");
+
+    if (!errorBox) return;
+
+    errorBox.textContent = message;
+    errorBox.classList.add("show");
+}
+
+function getFieldValue(id) {
+    const field = document.getElementById(id);
+    return field ? field.value.trim() : "";
+}
+
+function clearForm() {
+    const fields = document.querySelectorAll("input, textarea, select");
+
+    fields.forEach(field => {
+        field.value = "";
+    });
+}
+
+async function handleAddProperty() {
+    clearErrors();
+
+    const title = getFieldValue("title");
+    const type = getFieldValue("type");
+    const location = getFieldValue("location");
+    const price = getFieldValue("price");
+    const bedrooms = getFieldValue("bedrooms");
+    const bathrooms = getFieldValue("bathrooms");
+    const area = getFieldValue("area");
+    const imageUrl = getFieldValue("imageUrl");
+    const additionalImages = getFieldValue("additionalImages");
+    const description = getFieldValue("description");
+
+    let hasError = false;
 
     if (!title) {
-        document.querySelectorAll(".form-group")[0].querySelector(".error").textContent = "Title is required";
-        document.querySelectorAll(".form-group")[0].querySelector(".error").classList.add("show");
+        showFieldError("title", "Property title is required.");
         hasError = true;
     }
 
     if (!type) {
-        document.querySelectorAll(".form-group")[1].querySelector(".error").textContent = "Type is required";
-        document.querySelectorAll(".form-group")[1].querySelector(".error").classList.add("show");
+        showFieldError("type", "Property type is required.");
         hasError = true;
     }
 
     if (!location) {
-        document.querySelectorAll(".form-group")[2].querySelector(".error").textContent = "Location is required";
-        document.querySelectorAll(".form-group")[2].querySelector(".error").classList.add("show");
+        showFieldError("location", "Location is required.");
         hasError = true;
     }
 
-    if (!price || price <= 0) {
-        document.querySelectorAll(".form-group")[3].querySelector(".error").textContent = "Valid price is required";
-        document.querySelectorAll(".form-group")[3].querySelector(".error").classList.add("show");
+    if (!price || Number(price) <= 0) {
+        showFieldError("price", "Valid price is required.");
         hasError = true;
     }
 
-    if (!bedrooms) {
-        document.querySelectorAll(".form-group")[4].querySelector(".error").textContent = "Bedrooms is required";
-        document.querySelectorAll(".form-group")[4].querySelector(".error").classList.add("show");
+    if (!bedrooms || Number(bedrooms) <= 0) {
+        showFieldError("bedrooms", "Bedrooms are required.");
         hasError = true;
     }
 
-    if (!bathrooms) {
-        document.querySelectorAll(".form-group")[5].querySelector(".error").textContent = "Bathrooms is required";
-        document.querySelectorAll(".form-group")[5].querySelector(".error").classList.add("show");
+    if (!bathrooms || Number(bathrooms) <= 0) {
+        showFieldError("bathrooms", "Bathrooms are required.");
         hasError = true;
     }
 
-    if (!area || area <= 0) {
-        document.querySelectorAll(".form-group")[6].querySelector(".error").textContent = "Valid area is required";
-        document.querySelectorAll(".form-group")[6].querySelector(".error").classList.add("show");
+    if (!area || Number(area) <= 0) {
+        showFieldError("area", "Valid area is required.");
         hasError = true;
     }
 
     if (!imageUrl) {
-        document.querySelectorAll(".form-group")[7].querySelector(".error").textContent = "Image URL is required";
-        document.querySelectorAll(".form-group")[7].querySelector(".error").classList.add("show");
+        showFieldError("imageUrl", "Main image URL is required.");
         hasError = true;
     }
 
     if (!description) {
-        document.querySelectorAll(".form-group")[8].querySelector(".error").textContent = "Description is required";
-        document.querySelectorAll(".form-group")[8].querySelector(".error").classList.add("show");
+        showFieldError("description", "Description is required.");
         hasError = true;
     }
 
     if (hasError) return;
 
+    const propertyData = {
+        title: title,
+        type: type,
+        location: location,
+        price: parseFloat(price),
+        bedrooms: parseInt(bedrooms),
+        bathrooms: parseInt(bathrooms),
+        area: parseFloat(area),
+        imageUrl: imageUrl,
+        additionalImages: additionalImages,
+        description: description,
+        createdAt: new Date().toISOString()
+    };
+
     try {
-        const property = {
-            title: title,
-            type: type,
-            location: location,
-            price: parseFloat(price),
-            bedrooms: parseInt(bedrooms),
-            bathrooms: parseInt(bathrooms),
-            area: parseFloat(area),
-            imageUrl: imageUrl,
-            description: description,
-            createdAt: new Date()
-        };
+        await createProperty(propertyData);
 
-        // Create property via API
-        const response = await fetch("https://localhost:7144/api/property", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(property)
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to create property");
-        }
-
-        const result = await response.json();
         showAlert("✓ Property listed successfully!", "success");
 
-        // Clear form
-        document.querySelectorAll("input, textarea, select").forEach(el => {
-            if (el.type !== "button") el.value = "";
-        });
+        clearForm();
 
         setTimeout(() => {
-            window.location.href = "properties.html";
-        }, 2000);
+            window.location.href = "manage-properties.html";
+        }, 1200);
+
     } catch (error) {
-        console.error("Error:", error);
-        showAlert("✗ Failed to list property. Please try again.", "error");
+        console.error("Failed to add property:", error);
+        showAlert("✗ Failed to list property. Please make sure backend is running.", "error");
     }
 }
 
-// Initialize
 document.addEventListener("DOMContentLoaded", () => {
-    updateNavbar();
+    protectAdminPage();
 });

@@ -32,9 +32,14 @@ public class PropertyService : IPropertyService
     public Property? Update(int id, Property property)
     {
         var existing = _context.Properties.FirstOrDefault(x => x.Id == id);
-        if (existing == null) return null;
+
+        if (existing == null)
+        {
+            return null;
+        }
 
         existing.Title = property.Title;
+        existing.Type = property.Type;
         existing.Description = property.Description;
         existing.Price = property.Price;
         existing.Location = property.Location;
@@ -42,8 +47,10 @@ public class PropertyService : IPropertyService
         existing.Bathrooms = property.Bathrooms;
         existing.Area = property.Area;
         existing.ImageUrl = property.ImageUrl;
+        existing.AdditionalImages = property.AdditionalImages;
 
         _context.SaveChanges();
+
         return existing;
     }
 

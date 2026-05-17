@@ -54,14 +54,23 @@ function clearErrors() {
     });
 }
 
-function showFieldError(index, message) {
-    const groups = document.querySelectorAll(".form-group");
-    const errorBox = groups[index]?.querySelector(".error");
+function showFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+
+    if (!field) return;
+
+    const formGroup = field.closest(".form-group");
+    const errorBox = formGroup?.querySelector(".error");
 
     if (!errorBox) return;
 
     errorBox.textContent = message;
     errorBox.classList.add("show");
+}
+
+function getFieldValue(id) {
+    const field = document.getElementById(id);
+    return field ? field.value.trim() : "";
 }
 
 async function loadPropertyForEdit() {
@@ -89,6 +98,7 @@ async function loadPropertyForEdit() {
         document.getElementById("bathrooms").value = currentProperty.bathrooms || "";
         document.getElementById("area").value = currentProperty.area || "";
         document.getElementById("imageUrl").value = currentProperty.imageUrl || "";
+        document.getElementById("additionalImages").value = currentProperty.additionalImages || "";
         document.getElementById("description").value = currentProperty.description || "";
 
     } catch (error) {
@@ -97,63 +107,68 @@ async function loadPropertyForEdit() {
     }
 }
 
+
+
+
+
 async function handleUpdateProperty() {
     clearErrors();
 
-    const title = document.getElementById("title").value.trim();
-    const type = document.getElementById("type").value.trim();
-    const location = document.getElementById("location").value.trim();
-    const price = document.getElementById("price").value;
-    const bedrooms = document.getElementById("bedrooms").value;
-    const bathrooms = document.getElementById("bathrooms").value;
-    const area = document.getElementById("area").value;
-    const imageUrl = document.getElementById("imageUrl").value.trim();
-    const description = document.getElementById("description").value.trim();
+    const title = getFieldValue("title");
+    const type = getFieldValue("type");
+    const location = getFieldValue("location");
+    const price = getFieldValue("price");
+    const bedrooms = getFieldValue("bedrooms");
+    const bathrooms = getFieldValue("bathrooms");
+    const area = getFieldValue("area");
+    const imageUrl = getFieldValue("imageUrl");
+    const additionalImages = getFieldValue("additionalImages");
+    const description = getFieldValue("description");
 
     let hasError = false;
 
     if (!title) {
-        showFieldError(0, "Property title is required.");
+        showFieldError("title", "Property title is required.");
         hasError = true;
     }
 
     if (!type) {
-        showFieldError(1, "Property type is required.");
+        showFieldError("type", "Property type is required.");
         hasError = true;
     }
 
     if (!location) {
-        showFieldError(2, "Location is required.");
+        showFieldError("location", "Location is required.");
         hasError = true;
     }
 
     if (!price || Number(price) <= 0) {
-        showFieldError(3, "Valid price is required.");
+        showFieldError("price", "Valid price is required.");
         hasError = true;
     }
 
     if (bedrooms === "" || Number(bedrooms) < 0) {
-        showFieldError(4, "Valid bedrooms value is required.");
+        showFieldError("bedrooms", "Valid bedrooms value is required.");
         hasError = true;
     }
 
     if (bathrooms === "" || Number(bathrooms) < 0) {
-        showFieldError(5, "Valid bathrooms value is required.");
+        showFieldError("bathrooms", "Valid bathrooms value is required.");
         hasError = true;
     }
 
     if (!area || Number(area) <= 0) {
-        showFieldError(6, "Valid area is required.");
+        showFieldError("area", "Valid area is required.");
         hasError = true;
     }
 
     if (!imageUrl) {
-        showFieldError(7, "Image URL is required.");
+        showFieldError("imageUrl", "Main image URL is required.");
         hasError = true;
     }
 
     if (!description) {
-        showFieldError(8, "Description is required.");
+        showFieldError("description", "Description is required.");
         hasError = true;
     }
 
@@ -169,6 +184,7 @@ async function handleUpdateProperty() {
         bathrooms: parseInt(bathrooms),
         area: parseFloat(area),
         imageUrl: imageUrl,
+        additionalImages: additionalImages,
         description: description,
 
         // keep original created date if backend/model needs it

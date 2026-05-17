@@ -37,8 +37,31 @@ async function loadPropertyDetails() {
     }
 }
 
+// Get main + additional gallery images
+function getGalleryImages(property) {
+    const images = [];
+
+    if (property.imageUrl) {
+        images.push(property.imageUrl);
+    }
+
+    if (property.additionalImages) {
+        const extraImages = property.additionalImages
+            .split(/\n|,/)
+            .map(img => img.trim())
+            .filter(img => img.length > 0);
+
+        images.push(...extraImages);
+    }
+
+    return [...new Set(images)];
+}
+
 function displayPropertyDetail(property) {
-    const imageUrl = property.imageUrl || "https://via.placeholder.com/1000x500?text=No+Image";
+    const fallbackImage = "https://via.placeholder.com/1000x500?text=No+Image";
+    const imageUrl = property.imageUrl || fallbackImage;
+
+    const galleryImages = getGalleryImages(property);
 
     const price = new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -51,8 +74,24 @@ function displayPropertyDetail(property) {
                 src="${imageUrl}" 
                 alt="${property.title || "Property Image"}" 
                 class="property-detail-image" 
-                onerror="this.src='https://via.placeholder.com/1000x500?text=No+Image'"
+                onerror="this.src='${fallbackImage}'"
             >
+
+            ${galleryImages.length > 1
+            ? `
+                        <div class="property-gallery">
+                            ${galleryImages.map(img => `
+                                <img 
+                                    src="${img}" 
+                                    alt="Property gallery image"
+                                    onclick="changeMainPropertyImage(this.src)"
+                                    onerror="this.style.display='none'"
+                                >
+                            `).join("")}
+                        </div>
+                    `
+            : ""
+        }
 
             <div class="property-detail-content">
                 <h1>${property.title || "Untitled Property"}</h1>
@@ -133,6 +172,14 @@ function displayPropertyDetail(property) {
     document.getElementById("propertyContainer").innerHTML = html;
 
     autofillInquiryForm();
+}
+
+function changeMainPropertyImage(imageUrl) {
+    const mainImage = document.querySelector(".property-detail-image");
+
+    if (mainImage) {
+        mainImage.src = imageUrl;
+    }
 }
 
 function autofillInquiryForm() {

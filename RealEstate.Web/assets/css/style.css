@@ -1455,3 +1455,29 @@ body.popup-open {
     color: #6b7280;
     cursor: not-allowed;
 }
+
+
+.property-gallery {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: #ffffff;
+    overflow-x: auto;
+    border-bottom: 1px solid #eee;
+}
+
+    .property-gallery img {
+        width: 120px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: 0.2s ease;
+        flex-shrink: 0;
+    }
+
+        .property-gallery img:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+        }

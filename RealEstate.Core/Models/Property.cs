@@ -12,6 +12,7 @@ public class Property
     public int Bathrooms { get; set; }
     public double Area { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
+    public string AdditionalImages { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
